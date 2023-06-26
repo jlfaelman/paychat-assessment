@@ -1,10 +1,10 @@
 <div class="flex flex-col p-[2rem]">
 <div class="flex justify-between">
         <h1 class="text-2xl">Registration Form</h1>
-        <a href="/" class="p-2">Back</a>
+        <a href="<?= site_url()?>" class="p-2">Back</a>
     </div>
-<form method="post" id="employee-form" class="flex flex-col border p-2 m-[1rem] rounded shadow gap-1">
-    <input class="border px-2 shadow rounded "type="text" name="id" id="id" value="<?=(isset($employee)) ? $employee['id'] : ""?>">
+<form method="post" id="employee-form" class="flex flex-col border p-2 m-[1rem] rounded shadow gap-1" >
+    <input hidden class="border px-2 shadow rounded "type="text" name="id" id="id" value="<?=(isset($employee)) ? $employee['id'] : ""?>">
 
     <label for="firstname">Firstname:</label>
     <input class="border px-2 shadow rounded "type="text" name="firstname" id="firstname" required value="<?=(isset($employee)) ? $employee['firstname'] : ""?>">
@@ -42,9 +42,6 @@
 </div>
 
 <script>
-    $(()=>{
-       console.log('<?=site_url('add/submit')?>')
-    })
     $('#employee-form').on('submit',(e)=>{
         e.preventDefault();
         const id = $('#id').val()
@@ -58,29 +55,19 @@
             password:$('#password').val(),
             birth_date:$('#birth_date').val(),
         }
-        if(id.length > 0){
 
-            $.ajax({
-                type: 'POST',
-                url: "<?=site_url('edit/${id}/submit')?>",
-                data: data,
-            }).done(response=>{
-                console.log(response)
-            }).fail(err=>{
-                console.log(err.responseText)
-            });
-        
-        }else {
-            $.ajax({
-                type: 'POST',
-                url: "<?=site_url('add/submit')?>",
-                data: data,
-            }).done(response=>{
-                console.log(response)
-            }).fail(err=>{
-                console.log(err.responseText)
-            });
-        }
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: "<?=(isset($employee)) ? site_url("/employee/submit/".$employee['id']) : site_url('/employee/submit')?>",
+            data: data,
+        }).done(response=>{
+            if(response.status == "200") window.location.href = "<?= site_url()?>"
+        }).fail(err=>{
+            console.log(err)
+        });
+    
+
 
 
        

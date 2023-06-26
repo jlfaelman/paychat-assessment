@@ -56,10 +56,10 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 ## Requirments 
 - Composer 2.5.8 
 - PHP 7.4+
-
+- Xampp 3.3.0
 
 
 ## To Run
 
 - Download the copy of the software
-- Type in the terminal 'php spark serve' and Enter.
+- Put in htdocs directory.

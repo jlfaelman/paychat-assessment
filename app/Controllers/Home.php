@@ -39,33 +39,38 @@ class Home extends BaseController
 
     public function update($id = null)
     {
-        helper('uri');
+
         $employee = new EmployeeModel();
-        $id = service('uri')->getSegment(2);
 
         if(!isset($id)){
 
-            $body = json_decode($this->request->getBody());
+            $data = $this->request->getPost();
 
-            $employee->insert($body);
+         
+            $employee->insert($data);
         }else{
   
-            $body = json_decode($this->request->getBody());
+            $data = $this->request->getPost();
 
-            $employee->update($id,$body);
+            $employee->update($id,$data);
         }
 
-
-        return $this->respond(["msg"=>"success"], 200);
+        echo json_encode(["msg" => "ok", "status" => "200"]);
+       
     }
 
     protected function loadEmployees($id = null)
     {   
         if(!isset($id)){
+
             $employee = new EmployeeModel();
+
             return $employee->findAll();
+
         }else{
+
             $employee = new EmployeeModel();
+            
             return $employee->find($id);
         }
     }
@@ -73,11 +78,22 @@ class Home extends BaseController
     protected function loadAccessLevels($id)
     {
         if(!isset($id)){
+
             $al = new AccessLevelModel();
+
             return $al->findAll();
+            
         }else{
             $al = new AccessLevelModel();
+
             return $al->find($id);
         }
+    }
+    public function options($any)
+    {
+        return $this->response->setHeader('Access-Control-Allow-Origin', '*') //for allow any domain, insecure
+            ->setHeader('Access-Control-Allow-Headers', '*') //for allow any headers, insecure
+            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE') //method allowed
+            ->setStatusCode(200); //status code
     }
 }

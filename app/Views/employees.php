@@ -3,7 +3,7 @@
         <div class="container mx-auto border p-2 shadow ">
             <div class="flex justify-between">
             <h1 class="text-2xl font-bold mb-4">Employee Table</h1>
-            <a  href="/add"  class=" text-green-700 px-2 font-semibold ">Add</a>
+            <a  href="<?=site_url("/add")?>"  class=" text-green-700 px-2 font-semibold ">Add</a>
             </div>
             
             <table class="table-auto w-full">
@@ -31,8 +31,8 @@
                             <td class="text-center"><?= $emp['date_modified'] ?></td>
                             <td class="text-center">
                                 <div class="flex gap-2">
-                                    <a href="/edit/<?=$emp['id']?>" class="bg-blue-600 hover:bg-blue-800  rounded shadow text-white px-2 py-1">Edit</a>
-                                    <a href="/delete/<?=$emp['id']?>"  class="bg-red-600 hover:bg-red-800 rounded shadow text-white px-2 py-1">Remove</a>
+                                    <a href="<?=site_url("/edit/".$emp['id'])?>" class="bg-blue-600 hover:bg-blue-800  rounded shadow text-white px-2 py-1">Edit</a>
+                                    <a href="<?=site_url("/delete/".$emp['id'])?>"  class="bg-red-600 hover:bg-red-800 rounded shadow text-white px-2 py-1">Remove</a>
                                 </div>
                             </td>
 
