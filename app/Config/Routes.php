@@ -29,11 +29,13 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->get('/add','Home::form');
-$routes->post('/add/submit','Home::update',['filter'=>'cors']);
-$routes->get('/edit/(:num)','Home::form');
-$routes->post('/edit/(:num)/submit','Home::update',['filter'=>'cors']);
+// $routes->get('/', 'Home::index');
+$routes->add('/','Home::index');
+$routes->add('/add','Home::form');
+$routes->add('/edit/(:num)','Home::form/$1');
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

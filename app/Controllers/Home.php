@@ -18,11 +18,7 @@ class Home extends BaseController
 
     public function form($id = null) 
     {
-        helper('uri');
-        
-        $id = service('uri')->getSegment(2);
-
-        if($id != ""){
+        if(isset($id)){
             $data['employee'] = $this->loadEmployees($id);
             $header['title'] = "Edit" ;
         }
