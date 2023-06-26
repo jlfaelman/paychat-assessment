@@ -32,11 +32,13 @@ $routes->set404Override();
 // $routes->get('/', 'Home::index');
 $routes->options('(:any)', 'Home/options');
 
-$routes->add('/','Home::index');
-$routes->add('/add','Home::form');
-$routes->add('/edit/(:num)','Home::form/$1');
-$routes->add('/employee/submit','Home::update');
-$routes->add('/employee/submit/(:num)','Home::update/$1');
+$routes->add('/','Home::index',['filter' => 'auth']);
+$routes->add('/auth','Auth::index');
+$routes->add('/auth/submit','Auth::authenticate');
+$routes->add('/add','Home::form', ['filter' => 'auth']);
+$routes->add('/edit/(:num)','Home::form/$1', ['filter' => 'auth']);
+$routes->add('/employee/submit','Home::update', ['filter' => 'auth']);
+$routes->add('/employee/submit/(:num)','Home::update/$1', ['filter' => 'auth']);
 
 
 

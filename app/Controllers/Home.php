@@ -46,12 +46,16 @@ class Home extends BaseController
 
             $data = $this->request->getPost();
 
-         
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            
+           
             $employee->insert($data);
         }else{
   
             $data = $this->request->getPost();
 
+            $data['password'] =  password_hash($data['password'], PASSWORD_DEFAULT);
+         
             $employee->update($id,$data);
         }
 
